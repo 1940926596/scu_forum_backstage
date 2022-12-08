@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.Forum_MessageDao">
+
+    <select id="getForum_MessageList" resultType="com.example.pojo.Forum_Message">
+        select * from mydb.Forum_Message;
+   </select>
+
+    <select id="getOneForum_MessageList" resultType="com.example.pojo.Forum_Message">
+        select * from mydb.Forum_Message where message_id = #{message_id};
+   </select>
+
+    <select id="getAllForum_MessageList" resultType="com.example.pojo.Forum_Message">
+        select * from mydb.Forum_Message where message_content_id = #{message_content_id};
+   </select>
+
+    <select id="getForum_Message_Count" resultType="int">
+        select count(*) from mydb.Forum_Message;
+    </select>
+
+    <select id="addForum_MessageList" resultType="com.example.pojo.Forum_Message">
+        insert into mydb.Forum_Message(message_content_id,message_sender_name,message_content,message_send_time) value (#{message_content_id},#{message_sender_name},#{message_content},#{message_send_time});
+   </select>
+
+    <select id="updateForum_MessageList" resultType="com.example.pojo.Forum_Message">
+       update mydb.Forum_Message set message_content=#{message_content} where message_id=#{message_id};
+   </select>
+
+    <select id="deleteForum_MessageList" resultType="com.example.pojo.Forum_Message">
+        delete from mydb.Forum_Message where message_id=#{message_id};
+   </select>
+
+
+</mapper>

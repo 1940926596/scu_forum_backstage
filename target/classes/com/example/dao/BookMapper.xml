@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.BookDao">
+
+    <select id="getBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where BookTypes=#{bookType};
+   </select>
+
+    <select id="getAllBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book;
+   </select>
+
+    <select id="getOneBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where BookId = #{bookId};
+   </select>
+
+    <select id="getOneNameBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where BookName = #{bookName};
+   </select>
+
+    <select id="getAllNotSoldBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where isSold= 0;
+   </select>
+
+    <select id="addBookList" resultType="com.example.pojo.Book">
+        insert into mydb.Book (BookName,ISBN,UserPublishId,BookTypes) value (#{book_name},#{ISBN},#{userId},#{bookType});
+   </select>
+
+    <select id="updateBookList" resultType="com.example.pojo.Book">
+       update mydb.Book set ISBN=#{ISBN},BookName=#{book_name},BookType=#{bookType} where BookId=#{bookId};
+   </select>
+
+    <select id="deleteBookList" resultType="com.example.pojo.Book">
+        delete from mydb.Book where BookId=#{bookId};
+   </select>
+
+
+</mapper>

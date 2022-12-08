@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.InformationDao">
+
+    <select id="getInformationList" resultType="com.example.pojo.Information">
+        select * from mydb.Information;
+   </select>
+
+    <select id="getOneInformationList" resultType="com.example.pojo.Information">
+        select * from mydb.Information where transactionId = #{transactionId};
+   </select>
+
+<!--    <select id="addInformationList" resultType="com.example.pojo.Information">-->
+<!--        insert into mydb.Information (InformationName,ISBN,UserPublishId,InformationType) value (#{transaction_name},#{ISBN},#{userId},#{transactionType});-->
+<!--   </select>-->
+
+<!--    <select id="updateInformationList" resultType="com.example.pojo.Information">-->
+<!--       update mydb.Information set ISBN=#{ISBN},InformationName=#{transaction_name},InformationType=#{transactionType} where InformationId=#{transactionId};-->
+<!--   </select>-->
+
+<!--    <select id="deleteInformationList" resultType="com.example.pojo.Information">-->
+<!--        delete from mydb.Information where InformationId=#{transactionId};-->
+<!--   </select>-->
+
+
+</mapper>

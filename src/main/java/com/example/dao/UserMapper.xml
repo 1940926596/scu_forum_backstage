@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.UserDao">
+
+    <select id="getUserList" resultType="com.example.pojo.User">
+        select * from mydb.user;
+   </select>
+
+    <select id="getOneUserList" resultType="com.example.pojo.User">
+        select * from mydb.user where id = #{userId};
+   </select>
+
+    <select id="getOneExitUserList" resultType="com.example.pojo.User">
+        select * from mydb.user where name= #{userName};
+   </select>
+
+    <select id="getOne_Name_UserList" resultType="com.example.pojo.User">
+        select * from mydb.user where name= #{userName} And pwd=#{userPwd};
+   </select>
+
+
+    <select id="addUserList" resultType="com.example.pojo.User">
+        insert into mydb.user (name,pwd,email,position) value (#{user_name},#{password},#{email},#{position});
+   </select>
+
+    <select id="getUser_Count" resultType="int">
+        select count(*) from mydb.user;
+    </select>
+
+    <select id="updateUserList" resultType="com.example.pojo.User">
+       update mydb.user set name=#{user_name},pwd=#{password},position=#{position}where id=#{userId};
+   </select>
+
+    <select id="deleteUserList" resultType="com.example.pojo.User">
+        delete from mydb.user where id=#{userId};
+   </select>
+
+</mapper>

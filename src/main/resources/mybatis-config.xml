@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <environments default="development">
+        <environment id="development">
+         <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://43.143.211.83:3306/mydb?useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="mydb"/>
+                <property name="password" value="@Cjr011031"/>
+            </dataSource>
+        </environment>
+    </environments>
+<!--    每一个Mapper.xml都需要再Mybatis核心配置文件中注册-->
+    <mappers>
+        <mapper resource="com/example/dao/UserMapper.xml"/>
+        <mapper resource="com/example/dao/BookMapper.xml"/>
+        <mapper resource="com/example/dao/InformationMapper.xml"/>
+        <mapper resource="com/example/dao/Forum_UserMapper.xml"/>
+        <mapper resource="com/example/dao/Forum_PageMapper.xml"/>
+        <mapper resource="com/example/dao/Forum_MessageMapper.xml"/>
+        <mapper resource="com/example/dao/VerificationMapper.xml"/>
+    </mappers>
+
+</configuration>
+
+<!--spring:
+  datasource:
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+-->
