@@ -25,7 +25,7 @@
    </select>
 
     <select id="addBookList" resultType="com.example.pojo.Book">
-        insert into mydb.Book (BookName,ISBN,UserPublishId,BookTypes) value (#{book_name},#{ISBN},#{userId},#{bookType});
+        insert into mydb.Book (BookName,ISBN,UserPublishId,BookTypes,imageURL) value (#{book_name},#{ISBN},#{userId},#{bookType},#{imageURL});
    </select>
 
     <select id="updateBookList" resultType="com.example.pojo.Book">

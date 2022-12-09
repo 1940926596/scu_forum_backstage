@@ -103,7 +103,7 @@ public class BookController {
         //先连接mapper里面的userDao
         BookDao mapper = sqlSession.getMapper(BookDao.class);
         //可以调用mapper的方法
-//        List<Book> BookList = mapper.addBookList(book_name,ISBN,userId,bookType);
+        //List<Book> BookList = mapper.addBookList(book_name,ISBN,userId,bookType);
         //关闭SqlSession
         sqlSession.close();
         return "index";
