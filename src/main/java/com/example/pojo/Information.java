@@ -2,41 +2,15 @@ package com.example.pojo;
 
 public class Information {
     private Integer transactionId;
-    private enum Position{
-        JiangAn,WangJiang,HuaXi;
-    }
-    private String sendUserId;
-    private String releaseUserId;
     private Integer bookId;
+    private Integer sellUserId;
+    private Integer buyUserId;
 
-    public Integer getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
-
-    public void setUserPosition(String userPosition) {
-        if (Information.Position.JiangAn.toString() == userPosition)
-            System.out.println("江安校区");
-        if (Information.Position.WangJiang.toString() == userPosition)
-            System.out.println("望江校区");
-        if (Information.Position.HuaXi.toString() == userPosition)
-            System.out.println("华西校区");
-    }
-
-    public Information(Integer transactionId, String sendUserId, String releaseUserId, Integer bookId) {
+    public Information(Integer transactionId, Integer bookId, Integer sellUserId, Integer buyUserId) {
         this.transactionId = transactionId;
-        this.sendUserId = sendUserId;
-        this.releaseUserId = releaseUserId;
         this.bookId = bookId;
-    }
-
-    public Information(Integer transactionId, String sendUserId, String releaseUserId) {
-        this.transactionId = transactionId;
-        this.sendUserId = sendUserId;
-        this.releaseUserId = releaseUserId;
+        this.sellUserId = sellUserId;
+        this.buyUserId = buyUserId;
     }
 
     public Integer getTransactionId() {
@@ -47,19 +21,27 @@ public class Information {
         this.transactionId = transactionId;
     }
 
-    public String getSendUserId() {
-        return sendUserId;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setSendUserId(String sendUserId) {
-        this.sendUserId = sendUserId;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
-    public String getReleaseUserId() {
-        return releaseUserId;
+    public Integer getSellUserId() {
+        return sellUserId;
     }
 
-    public void setReleaseUserId(String releaseUserId) {
-        this.releaseUserId = releaseUserId;
+    public void setSellUserId(Integer sellUserId) {
+        this.sellUserId = sellUserId;
+    }
+
+    public Integer getBuyUserId() {
+        return buyUserId;
+    }
+
+    public void setBuyUserId(Integer buyUserId) {
+        this.buyUserId = buyUserId;
     }
 }

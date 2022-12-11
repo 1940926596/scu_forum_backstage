@@ -5,19 +5,32 @@
 <mapper namespace="com.example.dao.BookDao">
 
     <select id="getBookList" resultType="com.example.pojo.Book">
-        select * from mydb.Book where BookTypes=#{bookType};
+        select * from mydb.Book where bookTypes=#{bookType};
+--         select * from mydb.Book where BookTypes=1;
    </select>
 
     <select id="getAllBookList" resultType="com.example.pojo.Book">
         select * from mydb.Book;
    </select>
 
+    <select id="getUserBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where userPublishId = #{userPublishId};
+   </select>
+
+    <select id="getUserNotSoldBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where bookId = #{bookId};
+   </select>
+
+    <select id="getUserSoldBookList" resultType="com.example.pojo.Book">
+        select * from mydb.Book where bookId = #{bookId};
+   </select>
+
     <select id="getOneBookList" resultType="com.example.pojo.Book">
-        select * from mydb.Book where BookId = #{bookId};
+        select * from mydb.Book where bookId = #{bookId};
    </select>
 
     <select id="getOneNameBookList" resultType="com.example.pojo.Book">
-        select * from mydb.Book where BookName = #{bookName};
+        select * from mydb.Book where bookName = #{bookName};
    </select>
 
     <select id="getAllNotSoldBookList" resultType="com.example.pojo.Book">
@@ -25,15 +38,27 @@
    </select>
 
     <select id="addBookList" resultType="com.example.pojo.Book">
-        insert into mydb.Book (BookName,ISBN,UserPublishId,BookTypes,imageURL) value (#{book_name},#{ISBN},#{userId},#{bookType},#{imageURL});
+        insert into mydb.Book (bookName,ISBN,userPublishId,bookTypes,imageURL,text) value (#{book_name},#{ISBN},#{userId},#{bookType},#{imageURL});
+--         insert into mydb.Book (bookName,ISBN,userPublishId,bookTypes,imageURL,text) value (1,1,1,1,1,'');
    </select>
 
     <select id="updateBookList" resultType="com.example.pojo.Book">
-       update mydb.Book set ISBN=#{ISBN},BookName=#{book_name},BookType=#{bookType} where BookId=#{bookId};
+       update mydb.Book set ISBN=#{ISBN},bookName=#{book_name},bookTypes=#{bookType},text=#{text} where bookId=#{bookId};
+--        update mydb.Book set ISBN=1,bookName=1,bookTypes=1,text=1 where bookId=1;
+   </select>
+
+    <select id="setBookSold" resultType="com.example.pojo.Book">
+       update mydb.Book set isSold=1 where bookId=#{bookId};
+--        update mydb.Book set ISBN=1,bookName=1,bookTypes=1,text=1 where bookId=1;
+   </select>
+
+    <select id="setBookNotSold" resultType="com.example.pojo.Book">
+       update mydb.Book set isSold= 0 where bookId=#{bookId};
+--        update mydb.Book set ISBN=1,bookName=1,bookTypes=1,text=1 where bookId=1;
    </select>
 
     <select id="deleteBookList" resultType="com.example.pojo.Book">
-        delete from mydb.Book where BookId=#{bookId};
+        delete from mydb.Book where bookId=#{bookId};
    </select>
 
 

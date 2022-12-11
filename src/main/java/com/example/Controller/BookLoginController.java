@@ -16,7 +16,7 @@ public class BookLoginController {
     @RequestMapping("/booksale_login")
     @ResponseBody
     public String login(@RequestParam("booksale_name") String booksale_name, @RequestParam("booksale_pwd") String booksale_pwd, HttpServletResponse response, HttpServletRequest request) {
-        Cookie cookie = new Cookie("userBookEmail", booksale_name);
+        Cookie cookie = new Cookie("userBookName", booksale_name);
         //add cookie to response
         response.addCookie(cookie);
 
@@ -33,7 +33,7 @@ public class BookLoginController {
     @RequestMapping("/booksale_logout")
     public String logout(HttpServletRequest request,HttpServletResponse response) {
         System.out.println(request.getCookies());
-        Cookie newCookie=new Cookie("userBookEmail",""); //假如要删除名称为username的Cookie JSESSIONID是cookie名 记得换成要删除的
+        Cookie newCookie=new Cookie("userBookName",""); //假如要删除名称为username的Cookie JSESSIONID是cookie名 记得换成要删除的
         newCookie.setPath("/");
         newCookie.setMaxAge(0); //立即删除型
         response.addCookie(newCookie); //重新写入，将覆盖之前的
@@ -58,7 +58,7 @@ public class BookLoginController {
         }
         if(cookies!=null) {
             for (Cookie cookie1 : cookies) {
-                if(cookie1.getName().equals("userBookEmail"))
+                if(cookie1.getName().equals("userBookName"))
                     return cookie1.getValue();
             }
         }

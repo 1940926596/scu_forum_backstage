@@ -20,9 +20,9 @@
         select * from mydb.user where name= #{userName} And pwd=#{userPwd};
    </select>
 
-
     <select id="addUserList" resultType="com.example.pojo.User">
         insert into mydb.user (name,pwd,email,position) value (#{user_name},#{password},#{email},#{position});
+--         insert into mydb.user (name,pwd,email,position) value (1,1,1,1);
    </select>
 
     <select id="getUser_Count" resultType="int">
@@ -30,7 +30,7 @@
     </select>
 
     <select id="updateUserList" resultType="com.example.pojo.User">
-       update mydb.user set name=#{user_name},pwd=#{password},position=#{position}where id=#{userId};
+       update mydb.user set name=#{user_name},pwd=#{password}where email=#{email};
    </select>
 
     <select id="deleteUserList" resultType="com.example.pojo.User">

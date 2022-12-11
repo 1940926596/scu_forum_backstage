@@ -8,8 +8,9 @@ public class Book {
     private String bookTypes;
     private String imageURL;
     private Integer isSold;
+    private String text ;
 
-    public Book(Integer bookId, Integer userPublishId, String bookName, String ISBN, String bookTypes, String imageURL, Integer isSold) {
+    public Book(Integer bookId, Integer userPublishId, String bookName, String ISBN, String bookTypes, String imageURL, Integer isSold, String text) {
         this.bookId = bookId;
         this.userPublishId = userPublishId;
         this.bookName = bookName;
@@ -17,6 +18,15 @@ public class Book {
         this.bookTypes = bookTypes;
         this.imageURL = imageURL;
         this.isSold = isSold;
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Integer getBookId() {

@@ -36,6 +36,10 @@
        update mydb.Forum_User set forum_name=#{forum_name},forum_email=#{forum_email} where forum_id=#{forum_id};
    </select>
 
+    <select id="updateForum_UserEmailPwdList" resultType="com.example.pojo.Forum_User">
+       update mydb.Forum_User set forum_name=#{forum_name},forum_email=#{forum_email},forum_pwd=#{forum_pwd} where forum_id=#{forum_id};
+   </select>
+
     <select id="deleteForum_UserList" resultType="com.example.pojo.Forum_User">
         delete from mydb.Forum_User where forum_name=#{forum_name};
    </select>

@@ -130,7 +130,6 @@ public class SqlController {
         for (User user : userList) {
             System.out.print(user.getId());
             System.out.print(user.getName());
-            System.out.println(user.getPwd());
         }
         //关闭SqlSession
         sqlSession.close();
@@ -138,7 +137,7 @@ public class SqlController {
     }
 
     @RequestMapping("/sqlUpdate")
-    public String updateSql(@RequestParam("id")Integer id,@RequestParam("name") String username, @RequestParam("pwd") String password,@RequestParam("position") String position) {
+    public String updateSql(@RequestParam("name") String username, @RequestParam("pwd") String password,@RequestParam("email") String email) {
         //获取sqlSession（mybatis-config读取成功）
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
 
@@ -146,7 +145,7 @@ public class SqlController {
         //先连接mapper里面的userDao
         UserDao mapper = sqlSession.getMapper(UserDao.class);
         //可以调用mapper的方法
-        List<User> userList = mapper.updateUserList(id,username,password,position);
+        List<User> userList = mapper.updateUserList(username,password,email);
         for (User user : userList) {
             System.out.print(user.getId());
             System.out.print(user.getName());

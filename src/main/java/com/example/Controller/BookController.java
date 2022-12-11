@@ -17,9 +17,9 @@ import java.util.List;
 
 @Controller
 public class BookController {
-    @GetMapping(value = "/bookList",produces = "application/json;charset=utf-8")
+    @GetMapping(value = "/bookTypeList",produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String getBook(@RequestParam("bookType") String bookType) throws JsonProcessingException {
+    public String getTypeBook(@RequestParam("bookType") String bookType) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -38,9 +38,7 @@ public class BookController {
         }
         //关闭SqlSession
         sqlSession.close();
-
         ObjectMapper mapper1 = new ObjectMapper();
-
         //创建一个对象，将Java对象转换成json对象
         String s = mapper1.writeValueAsString(bookList);
         return s;
@@ -52,7 +50,6 @@ public class BookController {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
-
         //方式一
         //先连接mapper里面的userDao
         //映射器是一些绑定映射语句的接口。映射器实例
@@ -74,7 +71,7 @@ public class BookController {
     }
 
     @RequestMapping("/bookOneList")
-    public String getOneBook() {
+    public String getOneBook(@RequestParam("bookId") Integer bookId) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -82,68 +79,192 @@ public class BookController {
         //方式一
         //先连接mapper里面的userDao
         //映射器是一些绑定映射语句的接口。映射器实例
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
         //可以调用mapper的方法
-        List<User> userList = mapper.getOneUserList(1);
-        for (User user : userList) {
-            System.out.print(user.getId());
-            System.out.print(user.getName());
-            System.out.println(user.getPwd());
+        List<Book> bookList = mapper.getOneBookList(bookId);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
         }
         //关闭SqlSession
         sqlSession.close();
-        return "redirect:/index.html";
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
+    @RequestMapping("/bookOneUserList")
+    public String getOneUserBook(@RequestParam("userPublishId") Integer userPublishId) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.getUserBookList(userPublishId);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
+    @RequestMapping("/bookOneNameList")
+    public String getOneNameBook(@RequestParam("bookName") String bookName) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.getOneNameBookList(bookName);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
+    @RequestMapping("/bookNotSoldList")
+    public String getAllNotSoldBook() throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.getAllNotSoldBookList();
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
+    @RequestMapping("/setBookSold")
+    public String setBookSold(@RequestParam("bookId") Integer bookId) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.setBookSold(bookId);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
+    @RequestMapping("/setBookNotSold")
+    public String setBookNotSold(@RequestParam("bookId") Integer bookId) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.setBookNotSold(bookId);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
     }
 
     @PostMapping("/bookAdd")
-    public String addBook(String book_name,String ISBN,Integer userId,String bookType) {
+    public String addBook(@RequestBody Book book) {
         //获取sqlSession（mybatis-config读取成功）
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         //方式一
         //先连接mapper里面的userDao
         BookDao mapper = sqlSession.getMapper(BookDao.class);
         //可以调用mapper的方法
-        //List<Book> BookList = mapper.addBookList(book_name,ISBN,userId,bookType);
+        List<Book> BookList = mapper.addBookList(book.getBookName(),
+                book.getISBN(),book.getUserPublishId(),book.getBookTypes(),
+                book.getImageURL(),book.getText());
         //关闭SqlSession
         sqlSession.close();
         return "index";
     }
 
-//    @RequestMapping("/bookUpdate")
-//    public String updateBook() {
-//        //获取sqlSession（mybatis-config读取成功）
-//        SqlSession sqlSession = MyBatisUtils.getSqlSession();
-//
-//        //方式一
-//        //先连接mapper里面的userDao
-//        UserDao mapper = sqlSession.getMapper(UserDao.class);
-//        //可以调用mapper的方法
-//        List<User> userList = mapper.updateUserList(2,"2","2");
-//        for (User user : userList) {
-//            System.out.print(user.getId());
-//            System.out.print(user.getName());
-//            System.out.println(user.getPwd());
-//        }
-//        //关闭SqlSession
-//        sqlSession.close();
-//        return "index";
-//    }
+    @PostMapping("/bookUpdate")
+    public String updateBook(@RequestBody Book book) {
+        //获取sqlSession（mybatis-config读取成功）
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        //方式一
+        //先连接mapper里面的userDao
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.updateBookList(book.getBookId(),book.getBookName(), book.getISBN(),book.getBookTypes(), book.getText());
+        //关闭SqlSession
+        sqlSession.close();
+        return "index";
+    }
 
     @RequestMapping("/bookDelete")
     public String deleteBook(@RequestParam("book_id")Integer book_id) {
         //获取sqlSession（mybatis-config读取成功）
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
-
         //方式一
         //先连接mapper里面的userDao
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
         //可以调用mapper的方法
-        List<User> userList = mapper.deleteUserList(book_id);
-        for (User user : userList) {
-            System.out.print(user.getId());
-            System.out.print(user.getName());
-            System.out.println(user.getPwd());
-        }
+        List<Book> bookList = mapper.deleteBookList(book_id);
         //关闭SqlSession
         sqlSession.close();
         return "index";

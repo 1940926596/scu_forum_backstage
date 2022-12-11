@@ -51,7 +51,7 @@ public class MyConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .maxAge(1800)
 //                .allowedOrigins("*");
-                .allowedOrigins("http://43.143.211.83:8081/", "http://43.143.211.83:8082/")
+                .allowedOrigins("http://43.143.211.83:8081/", "http://43.143.211.83:8082/","http://localhost:8081/")
                 .allowCredentials(true); //允许cookie跨域
     }
 

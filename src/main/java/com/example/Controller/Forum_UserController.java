@@ -192,6 +192,31 @@ public class Forum_UserController {
         return userLists;
     }
 
+    @RequestMapping("/forum_user_email_Pwd_update")
+    @ResponseBody
+    public String updateForum_EmailPwdUser(@RequestParam("forum_id") Integer forum_id,@RequestParam("forum_name") String forum_name,@RequestParam("forum_email") String forum_email,@RequestParam("forum_pwd") String forum_pwd) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        Forum_UserDao mapper = sqlSession.getMapper(Forum_UserDao.class);
+        //可以调用mapper的方法
+        List<Forum_User> userList = mapper.updateForum_UserEmailPwdList(forum_id,forum_name,forum_email,forum_pwd);
+        for (Forum_User user : userList) {
+            System.out.print(user.getForum_id());
+            System.out.print(user.getForum_name());
+            System.out.println(user.getForum_pwd());
+            System.out.println(user.getForum_email());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String userLists = mapper1.writeValueAsString(userList);
+        return userLists;
+    }
+
     @RequestMapping("/forum_user_delete")
     public String deleteForum_User(@RequestParam("forum_user_name") String forum_user_name) {
         //获取sqlSession（mybatis-config读取成功）

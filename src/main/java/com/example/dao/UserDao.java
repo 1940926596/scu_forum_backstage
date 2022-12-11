@@ -11,6 +11,6 @@ public interface UserDao {
     List<User> getOneExitUserList(String userName);
     List<User> getOne_Name_UserList(String userName,String userPwd);
     List<User> addUserList(String user_name,String password,String position,String email);
-    List<User> updateUserList(Integer userId,String user_name,String password,String position);
+    List<User> updateUserList(String user_name,String password,String email);
     List<User> deleteUserList(Integer userId);
 }

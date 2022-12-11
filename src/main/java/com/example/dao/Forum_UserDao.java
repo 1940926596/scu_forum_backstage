@@ -13,5 +13,6 @@ public interface Forum_UserDao {
     List<Forum_User> addForum_UserList(String forum_name,String forum_pwd,String forum_email);
     List<Forum_User> updateForum_UserList(Integer forum_id,String forum_name);
     List<Forum_User> updateForum_UserEmailList(Integer forum_id,String forum_name,String forum_email);
+    List<Forum_User> updateForum_UserEmailPwdList(Integer forum_id,String forum_name,String forum_email,String forum_pwd);
     List<Forum_User> deleteForum_UserList(String forum_name);
 }
