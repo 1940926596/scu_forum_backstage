@@ -71,6 +71,7 @@ public class BookController {
     }
 
     @RequestMapping("/bookOneList")
+    @ResponseBody
     public String getOneBook(@RequestParam("bookId") Integer bookId) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
@@ -97,6 +98,7 @@ public class BookController {
     }
 
     @RequestMapping("/bookOneUserList")
+    @ResponseBody
     public String getOneUserBook(@RequestParam("userPublishId") Integer userPublishId) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
@@ -122,7 +124,62 @@ public class BookController {
         return s;
     }
 
+    @RequestMapping("/userNotSoldBookList")
+    @ResponseBody
+    public String getUserNotSoldBookList(@RequestParam("userPublishId") Integer userPublishId) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.getUserNotSoldBookList(userPublishId);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
+    @RequestMapping("/userSoldBookList")
+    @ResponseBody
+    public String getUserSoldBookList(@RequestParam("userPublishId") Integer userPublishId) throws JsonProcessingException {
+        //获取sqlSession（mybatis-config读取成功）
+        //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
+        //方式一
+        //先连接mapper里面的userDao
+        //映射器是一些绑定映射语句的接口。映射器实例
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        //可以调用mapper的方法
+        List<Book> bookList = mapper.getUserSoldBookList(userPublishId);
+        for (Book book:bookList) {
+            System.out.print(book.getBookId());
+            System.out.print(book.getBookName());
+            System.out.println(book.getISBN());
+            System.out.println(book.getBookTypes());
+        }
+        //关闭SqlSession
+        sqlSession.close();
+        ObjectMapper mapper1 = new ObjectMapper();
+        //创建一个对象，将Java对象转换成json对象
+        String s = mapper1.writeValueAsString(bookList);
+        return s;
+    }
+
     @RequestMapping("/bookOneNameList")
+    @ResponseBody
     public String getOneNameBook(@RequestParam("bookName") String bookName) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
@@ -149,6 +206,7 @@ public class BookController {
     }
 
     @RequestMapping("/bookNotSoldList")
+    @ResponseBody
     public String getAllNotSoldBook() throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
@@ -175,6 +233,7 @@ public class BookController {
     }
 
     @RequestMapping("/setBookSold")
+    @ResponseBody
     public String setBookSold(@RequestParam("bookId") Integer bookId) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
@@ -201,6 +260,7 @@ public class BookController {
     }
 
     @RequestMapping("/setBookNotSold")
+    @ResponseBody
     public String setBookNotSold(@RequestParam("bookId") Integer bookId) throws JsonProcessingException {
         //获取sqlSession（mybatis-config读取成功）
         //SqlSession 提供了在数据库执行 SQL 命令所需的所有方法。你可以通过 SqlSession 实例来直接执行已映射的 SQL 语句。
@@ -234,6 +294,13 @@ public class BookController {
         //先连接mapper里面的userDao
         BookDao mapper = sqlSession.getMapper(BookDao.class);
         //可以调用mapper的方法
+//        System.out.print(book.getBookId());
+        System.out.println(book.getBookName());
+        System.out.println(book.getISBN());
+        System.out.println(book.getText());
+        System.out.println(book.getUserPublishId());
+        System.out.println(book.getImageURL());
+        System.out.println(book.getBookTypes());
         List<Book> BookList = mapper.addBookList(book.getBookName(),
                 book.getISBN(),book.getUserPublishId(),book.getBookTypes(),
                 book.getImageURL(),book.getText());

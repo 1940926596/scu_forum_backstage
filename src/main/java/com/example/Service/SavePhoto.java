@@ -15,10 +15,10 @@ public class SavePhoto {
     @PostMapping("/uploadImage")
     @ResponseBody
     public String uploadImage(@RequestBody Map<String,String> map) {
-        System.out.println(map);
+//        System.out.println(map);
         String base64Data=map.get("base64Data");
         System.out.println("==上传图片==");
-        System.out.println("==接收到的数据==" + base64Data);
+//        System.out.println("==接收到的数据==" + base64Data);
 
         String dataPrix = ""; //base64格式前头
         String data = "";//实体部分数据
@@ -55,7 +55,7 @@ public class SavePhoto {
         }
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         String tempFileName = uuid + suffix;
-        String imgFilePath = "D:\\Idea\\" + tempFileName;//新生成的图片
+        String imgFilePath = "D:\\Vue\\booksale\\src\\photo\\" + tempFileName;//新生成的图片
         Decoder decoder = Base64.getDecoder();
         try {
             //Base64解码
@@ -72,7 +72,8 @@ public class SavePhoto {
             out.close();
             String imgurl = tempFileName;
             //imageService.save(imgurl);
-            return (imgurl);
+            System.out.println(imgurl);
+            return imgurl;
         } catch (IOException e) {
             e.printStackTrace();
             return ("上传图片失败");

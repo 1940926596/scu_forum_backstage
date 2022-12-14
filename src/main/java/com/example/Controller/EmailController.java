@@ -64,6 +64,70 @@ public class EmailController {
         return "发送失败";
     }
 
+    @RequestMapping("/sendSellerSellEmail")
+    @ResponseBody
+    public String sendSellerSellEmail(@RequestParam(value = "emailReceiver") String emailReceiver) {
+        // 构建一个邮件对象
+        SimpleMailMessage message = new SimpleMailMessage();
+        // 设置邮件发送者
+        message.setFrom(from);
+        // 设置邮件接收者
+        message.setTo(emailReceiver);
+        // 设置邮件的主题
+        message.setSubject("校园二手书交易平台");
+        // 设置邮件的正文
+        Random random = new Random();
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            int r = random.nextInt(10);
+            code.append(r);
+        }
+        String text = "你的书被发起报价了，请登录网站查看";
+        message.setText(text);
+//        Verification.SellEmail(String.valueOf(code),emailReceiver);
+
+        // 发送邮件
+        try {
+            javaMailSender.send(message);
+            return code.toString();
+        } catch (MailException e) {
+            e.printStackTrace();
+        }
+        return "发送失败";
+    }
+
+    @RequestMapping("/sendSellerCancelEmail")
+    @ResponseBody
+    public String sendSellerCancelEmail(@RequestParam(value = "emailReceiver") String emailReceiver) {
+        // 构建一个邮件对象
+        SimpleMailMessage message = new SimpleMailMessage();
+        // 设置邮件发送者
+        message.setFrom(from);
+        // 设置邮件接收者
+        message.setTo(emailReceiver);
+        // 设置邮件的主题
+        message.setSubject("校园二手书交易平台");
+        // 设置邮件的正文
+        Random random = new Random();
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            int r = random.nextInt(10);
+            code.append(r);
+        }
+        String text = "你的书报价被撤销了，请登录网站查看";
+        message.setText(text);
+//        Verification.CancelEmail(String.valueOf(code),emailReceiver);
+
+        // 发送邮件
+        try {
+            javaMailSender.send(message);
+            return code.toString();
+        } catch (MailException e) {
+            e.printStackTrace();
+        }
+        return "发送失败";
+    }
+
     @RequestMapping("/saveVerifyCode")
     @ResponseBody
     public String verifyCode() {

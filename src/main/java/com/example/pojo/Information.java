@@ -5,12 +5,22 @@ public class Information {
     private Integer bookId;
     private Integer sellUserId;
     private Integer buyUserId;
+    private String time;
 
-    public Information(Integer transactionId, Integer bookId, Integer sellUserId, Integer buyUserId) {
+    public Information(Integer transactionId, Integer bookId, Integer sellUserId, Integer buyUserId, String time) {
         this.transactionId = transactionId;
         this.bookId = bookId;
         this.sellUserId = sellUserId;
         this.buyUserId = buyUserId;
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public Integer getTransactionId() {

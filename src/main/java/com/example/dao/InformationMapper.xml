@@ -12,17 +12,25 @@
         select * from mydb.Information where transactionId = #{transactionId};
    </select>
 
-<!--    <select id="addInformationList" resultType="com.example.pojo.Information">-->
-<!--        insert into mydb.Information (InformationName,ISBN,UserPublishId,InformationType) value (#{transaction_name},#{ISBN},#{userId},#{transactionType});-->
-<!--   </select>-->
+    <select id="getOneUserSellInformationList" resultType="com.example.pojo.Information">
+        select * from mydb.Information where sellUserId = #{sellUserId};
+   </select>
+
+    <select id="getOneUserBuyInformationList" resultType="com.example.pojo.Information">
+        select * from mydb.Information where buyUserId = #{buyUserId};
+   </select>
+
+    <select id="addInformationList" resultType="com.example.pojo.Information">
+        insert into mydb.Information(bookId,sellUserId,buyUserId,time) value (#{bookId},#{sellUserId},#{buyUserId},#{time});
+   </select>
 
 <!--    <select id="updateInformationList" resultType="com.example.pojo.Information">-->
 <!--       update mydb.Information set ISBN=#{ISBN},InformationName=#{transaction_name},InformationType=#{transactionType} where InformationId=#{transactionId};-->
 <!--   </select>-->
 
-<!--    <select id="deleteInformationList" resultType="com.example.pojo.Information">-->
-<!--        delete from mydb.Information where InformationId=#{transactionId};-->
-<!--   </select>-->
+    <select id="deleteInformationList" resultType="com.example.pojo.Information">
+        delete from mydb.Information where transactionId=#{transactionId};
+   </select>
 
 
 </mapper>
