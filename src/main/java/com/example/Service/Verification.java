@@ -9,7 +9,7 @@ public class Verification {
      public static String postVerification(String code,String name){
         try{
             //api url地址
-            String url = "http://43.143.211.83:8084/addCodeList?code="+code+"&name="+name;
+            String url = "http://localhost:8080/addCodeList?code="+code+"&name="+name;
             // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
             MultiValueMap<String, String> params= new LinkedMultiValueMap<String, String>();
             params.add("name", name);

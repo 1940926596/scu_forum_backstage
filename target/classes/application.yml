@@ -1,7 +1,3 @@
-server:
-  port: 8084
-
-
 spring:
   mail:
     # 配置 SMTP 服务器地址
